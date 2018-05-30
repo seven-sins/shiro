@@ -1,5 +1,6 @@
 package com.hiya.shiro.controller;
 
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -24,6 +25,7 @@ public class UserController extends BaseController {
 	UserService userService;
 	
 	@GetMapping("/rest/sys/user")
+	@RequiresPermissions("base")
 	public Response<User> find(User user) {
 		return new Response<>(200, userService.find(user));
 	}
