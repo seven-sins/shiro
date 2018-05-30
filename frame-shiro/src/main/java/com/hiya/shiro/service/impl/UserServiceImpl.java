@@ -55,4 +55,15 @@ public class UserServiceImpl implements UserService {
 		userMapper.delete(ids);
 	}
 
+	@Override
+	public User findByUsername(String username) {
+		User query = new User();
+		query.setUsername(username);
+		List<User> user = this.find(query);
+		if(user != null && !user.isEmpty()) {
+			return user.get(0);
+		}
+		return null;
+	}
+
 }
