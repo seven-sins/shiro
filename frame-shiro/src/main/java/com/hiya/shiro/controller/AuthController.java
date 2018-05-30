@@ -21,7 +21,7 @@ import com.hiya.object.sys.po.User;
 @RestController
 public class AuthController extends BaseController {
 
-	@PostMapping("/login")
+	@GetMapping("/login")
 	public Object login() {
 		return "login";
 	}
@@ -29,6 +29,11 @@ public class AuthController extends BaseController {
 	@GetMapping("/index")
 	public Object index() {
 		return "index";
+	}
+	
+	@GetMapping("/unauthorized")
+	public Object unauthorized() {
+		return "unauthorized";
 	}
 	
 	@PostMapping("/loginUser")

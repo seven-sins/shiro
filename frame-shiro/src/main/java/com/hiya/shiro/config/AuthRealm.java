@@ -41,7 +41,13 @@ public class AuthRealm extends AuthorizingRealm {
 		permissionList.add("base");
 		
 		SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
+		// 权限
 		info.addStringPermissions(permissionList);
+		
+		List<String> roleList = new ArrayList<>();
+		// 角色
+		roleList.add("admin");
+		info.addRoles(roleList);
 		
 		return info;
 	}

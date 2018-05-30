@@ -70,9 +70,14 @@ public class ShiroConfiguration {
 		LinkedHashMap<String, String> filterChainDefinitionMap = new LinkedHashMap<>();
 		// 必须登录才能访问
 		filterChainDefinitionMap.put("index", "authc");
+		
+		// 必须有admin角色才能访问接口/admin
+		filterChainDefinitionMap.put("/admin", "roles[admin]");
+		
 		// 不需要登录也能访问
 		filterChainDefinitionMap.put("/login", "anon");
-		
+		filterChainDefinitionMap.put("/loginUser", "anon");
+		filterChainDefinitionMap.put("/**", "user");
 		factory.setFilterChainDefinitionMap(filterChainDefinitionMap);
 		
 		return factory;

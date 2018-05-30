@@ -9,5 +9,4 @@ import com.hiya.object.sys.po.User;
  */
 public interface UserMapper extends BaseMapper<User> {
 
-	public User findByUsername(String username);
 }
