@@ -34,7 +34,10 @@ public class AuthRealm extends AuthorizingRealm {
 	}
 	
 	/**
-	 * 验证权限时调用此方法
+	 * 此方法调用hasRole,hasPermission的时候才会进行回调
+	 * 1、如果用户正常退出，缓存自动清空；
+     * 2、如果用户非正常退出，缓存自动清空；
+     * 3、如果我们修改了用户的权限，而用户不退出系统，修改的权限无法立即生效。
 	 */
 	@Override
 	protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
@@ -67,6 +70,10 @@ public class AuthRealm extends AuthorizingRealm {
 		String token = (String) auth.getCredentials();
 		// 解密获得username
 		String username = JWTUtil.getUsername(token);
+		
+		/**
+		 * 实际应用中, 用户信息可以存redis, 以下代码替换为从redis中获取当前登录用户信息
+		 */
 		User user = userService.findByUsername(username);
 		if(user == null) {
 			throw new AuthenticationException("用户不存在");
