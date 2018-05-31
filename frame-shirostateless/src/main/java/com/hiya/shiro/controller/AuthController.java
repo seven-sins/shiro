@@ -22,19 +22,9 @@ public class AuthController extends BaseController {
 	@Autowired
 	UserService userService;
 	
-	@GetMapping("/login")
-	public Object login() {
-		return "login";
-	}
-	
-	@GetMapping("/index")
-	public Object index() {
-		return "index";
-	}
-	
-	@GetMapping("/unauthorized")
+	@GetMapping("/401")
 	public Object unauthorized() {
-		return "unauthorized";
+		return "401";
 	}
 	
 	@PostMapping("/loginUser")
