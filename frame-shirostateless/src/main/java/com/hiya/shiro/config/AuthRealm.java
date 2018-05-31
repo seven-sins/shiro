@@ -7,7 +7,6 @@ import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
 import org.apache.shiro.authc.SimpleAuthenticationInfo;
-import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
@@ -15,6 +14,7 @@ import org.apache.shiro.subject.PrincipalCollection;
 
 import com.hiya.object.sys.po.User;
 import com.hiya.shiro.service.UserService;
+import com.hiya.shiro.utils.JWTUtil;
 
 /**
  * @author seven sins
@@ -28,15 +28,22 @@ public class AuthRealm extends AuthorizingRealm {
 		this.userService = userService;
 	}
 	
+	@Override
+	public boolean supports(AuthenticationToken token) {
+		return token instanceof JWTToken;
+	}
+	
 	/**
-	 * 授权
+	 * 验证权限时调用此方法
 	 */
 	@Override
 	protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
-		// 获取当前登录用户
-		// User user = (User) principals.fromRealm(this.getClass().getName()).iterator().next();
-		List<String> permissionList = new ArrayList<>();
+		/**
+		 * 登录成功时将用户权限列表存入redis, 进入此方法验证权限时从redis取出放入SimpleAuthorizationInfo返回
+		 */
+		// String username = JWTUtil.getUsername(principals.toString());
 		
+		List<String> permissionList = new ArrayList<>();
 		// 设置用户权限
 		permissionList.add("base");
 		
@@ -56,12 +63,19 @@ public class AuthRealm extends AuthorizingRealm {
 	 * 认证登录
 	 */
 	@Override
-	protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
-		UsernamePasswordToken usernamePasswordToken = (UsernamePasswordToken) token;
-		String username = usernamePasswordToken.getUsername();
+	protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken auth) throws AuthenticationException {
+		String token = (String) auth.getCredentials();
+		// 解密获得username
+		String username = JWTUtil.getUsername(token);
 		User user = userService.findByUsername(username);
+		if(user == null) {
+			throw new AuthenticationException("用户不存在");
+		}
+		if(!JWTUtil.verify(token, username, user.getPassword())) {
+			throw new AuthenticationException("用户或密码错误");
+		}
 		
-		return new SimpleAuthenticationInfo(user, user.getPassword(), this.getClass().getName());
+		return new SimpleAuthenticationInfo(token, token, this.getClass().getName());
 	}
 
 }
