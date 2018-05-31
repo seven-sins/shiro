@@ -31,15 +31,6 @@ public class ShiroConfiguration {
 	UserService userService;
 	
 	/**
-	 * 配置密码匹配器
-	 * @return
-	 */
-	//	@Bean("credentialMatcher")
-	//	public CredentialMatcher credentialMatcher() {
-	//		return new CredentialMatcher();
-	//	}
-	
-	/**
 	 * 配置授权登录
 	 * @param matcher
 	 * @return
