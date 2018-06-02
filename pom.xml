@@ -14,8 +14,9 @@
   		<module>frame-common</module>
   		<module>frame-base</module>
   		<module>frame-shiro</module>
-    <module>frame-shirostateless</module>
-  </modules>
+	    <module>frame-shirostateless</module>
+	    <module>frame-reactrest</module>
+  	</modules>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>

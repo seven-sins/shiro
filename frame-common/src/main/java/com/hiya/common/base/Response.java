@@ -10,8 +10,8 @@ import java.util.List;
  */
 public class Response<T> {
 
-	public static final String SUCCESS = "success";
-	public static final String FAILURE = "failure";
+	static final String SUCCESS = "success";
+	static final String FAILURE = "failure";
 
 	private Integer code;
 

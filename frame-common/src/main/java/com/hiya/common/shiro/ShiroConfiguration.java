@@ -93,7 +93,6 @@ public class ShiroConfiguration {
 		
 		// 不需要登录也能访问
 		filterChainDefinitionMap.put("/login", "anon");
-		filterChainDefinitionMap.put("/loginUser", "anon");
 		filterChainDefinitionMap.put("/401", "anon");
 		filterChainDefinitionMap.put("/**", "jwt");
 		factory.setFilterChainDefinitionMap(filterChainDefinitionMap);

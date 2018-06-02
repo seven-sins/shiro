@@ -1,6 +1,8 @@
 package com.hiya.common.exception;
 
 import org.apache.shiro.ShiroException;
+import org.apache.shiro.authc.AuthenticationException;
+import org.apache.shiro.authz.UnauthenticatedException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
@@ -21,6 +23,16 @@ public class CustomExceptionHandler {
 	 */
 	@ExceptionHandler(ShiroException.class)
 	public Response<?> handle401(ShiroException e) {
+		return new Response<>(401, e.getMessage());
+	}
+	
+	@ExceptionHandler(AuthenticationException.class)
+	public Response<?> handleAuthException(AuthenticationException e){
+		return new Response<>(401, e.getMessage());
+	}
+	
+	@ExceptionHandler(UnauthenticatedException.class)
+	public Response<?> unauthenticated(UnauthenticatedException e) {
 		return new Response<>(401, e.getMessage());
 	}
 	
