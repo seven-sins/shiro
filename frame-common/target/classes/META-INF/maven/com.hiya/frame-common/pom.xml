@@ -12,9 +12,12 @@
 	<artifactId>frame-common</artifactId>
 	<name>frame-common</name>
 
-
 	<dependencies>
-
+		<dependency>
+			<groupId>com.hiya</groupId>
+			<artifactId>frame-object</artifactId>
+		</dependency>
+		
 	</dependencies>
 
 

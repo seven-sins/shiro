@@ -12,6 +12,10 @@
     <select id="find" parameterType="com.hiya.object.sys.po.User" resultMap="userRM">
         SELECT a.id, a.username, a.age, a.password
         FROM sys_user a
+        WHERE 1=1
+        <if test="username != null">
+        	and a.username = #{username}
+        </if>
     </select>
     
     <select id="get" parameterType="long" resultMap="userRM">

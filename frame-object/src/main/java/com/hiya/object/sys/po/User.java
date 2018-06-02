@@ -1,11 +1,14 @@
 package com.hiya.object.sys.po;
 
+import java.io.Serializable;
+
 /**
  * @author seven sins
  * @date 2017年12月30日 下午4:13:46
  */
-public class User {
-
+public class User implements Serializable {
+	private static final long serialVersionUID = 3194849030213056994L;
+	
 	private Long id;
 	/**
 	 * 用户名

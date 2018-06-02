@@ -10,9 +10,25 @@
 	</parent>
 	<artifactId>frame-base</artifactId>
 	<name>frame-base</name>
+	
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
+	
 	<dependencies>
+		<dependency>
+			<groupId>com.hiya</groupId>
+			<artifactId>frame-common</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.hiya</groupId>
+			<artifactId>frame-object</artifactId>
+		</dependency>
+	
+	
+	
+	
+	
+	
 	</dependencies>
 </project>

@@ -8,10 +8,10 @@ spring:
     name: frame-shiro
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
-    url: jdbc:mysql://192.168.0.208:3306/cache_framework?characterEncoding=utf8&&useSSL=true
+    url: jdbc:mysql://127.0.0.1:3306/cache_framework?useUnicode=true&characterEncoding=utf8&useSSL=false
     username: root
     password: login
-    driver-class-name: com.mysql.cj.jdbc.Driver
+    driver-class-name: com.mysql.jdbc.Driver # com.mysql.cj.jdbc.Driver
   # redis配置(非集群)
   redis:
     host: 127.0.0.1

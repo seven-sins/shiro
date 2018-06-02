@@ -1,8 +1,0 @@
-com\hiya\common\config\mybatis\DruidConfiguration.class
-com\hiya\common\base\BaseMapper.class
-com\hiya\common\config\annotation\Database.class
-com\hiya\common\base\BaseController.class
-com\hiya\common\base\Response.class
-com\hiya\common\config\mybatis\MyBatisMapperScannerConfig.class
-com\hiya\common\config\mybatis\MyBatisConfig.class
-com\hiya\common\base\BaseService.class

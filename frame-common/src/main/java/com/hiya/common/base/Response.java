@@ -22,7 +22,6 @@ public class Response<T> {
 	private String message;
 	
 	public Response() {
-
 	}
 
 	public Response(T t) {
@@ -46,6 +45,13 @@ public class Response<T> {
 	public Response(Integer code, String message) {
 		this.code = code;
 		this.message = message;
+	}
+	
+	public static Response<?> success() {
+		Response<?> response = new Response<>();
+		response.code = 200;
+		response.message = SUCCESS;
+		return response;
 	}
 
 	public Integer getCode() {
