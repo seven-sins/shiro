@@ -11,8 +11,7 @@ package com.hiya.common.config.mybatis;
  */
 public class MyBatisMapperScannerConfig {
 
-	// TODO 此处获取配置失败, 待排查
-	// 或可在模块启动类上使用@MapperScan("com.lonecpp.redis.mapper")
+	// 可在模块启动类上使用@MapperScan("com.lonecpp.redis.mapper")
 	// @Value("${mybatis.params.mapperLocation}")
 	// String mapperLocation;
 
