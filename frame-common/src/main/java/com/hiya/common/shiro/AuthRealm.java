@@ -72,7 +72,7 @@ public class AuthRealm extends AuthorizingRealm {
 		String key = ShiroCommon.USER_PREFIX + username;
 		
 		if(redisService == null) {
-			redisService = SpringUtil.getBean(RedisServiceImpl.class);
+			redisService = SpringUtil.getBean("redisService", RedisServiceImpl.class);
 		}
 		
 		User user = (User) redisService.get(key);

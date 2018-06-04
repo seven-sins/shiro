@@ -1,12 +1,16 @@
 package com.hiya.shiro.controller;
 
+import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
+import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.hiya.common.base.BaseController;
+import com.hiya.common.base.Response;
 import com.hiya.common.service.RedisService;
 import com.hiya.common.shiro.ShiroCommon;
 import com.hiya.common.shiro.utils.JWTUtil;
@@ -43,5 +47,18 @@ public class AuthController extends BaseController {
 		redisService.add(key, userBean);
 		
 		return JWTUtil.sign(user.getUsername(), user.getPassword());
+	}
+	
+	@GetMapping("/logout")
+	public Response<?> logout(){
+		Subject subject = SecurityUtils.getSubject();
+		if(subject != null) {
+			String username = (String) subject.getPrincipal();
+			String key = ShiroCommon.USER_PREFIX + username;
+			redisService.delete(key);
+			//
+			subject.logout();
+		}
+		return Response.success();
 	}
 }

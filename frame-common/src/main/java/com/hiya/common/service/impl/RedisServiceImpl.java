@@ -13,7 +13,7 @@ import com.hiya.common.service.RedisService;
  * @author seven sins
  * @date 2018年6月2日 下午3:32:06
  */
-@Service
+@Service("redisService")
 public class RedisServiceImpl implements RedisService {
 
 	@Resource
