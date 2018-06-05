@@ -9,7 +9,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
-import org.apache.shiro.authz.UnauthenticatedException;
 import org.apache.shiro.web.filter.authc.BasicHttpAuthenticationFilter;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -31,7 +30,7 @@ public class JWTFilter extends BasicHttpAuthenticationFilter {
         HttpServletRequest req = (HttpServletRequest) request;
         String authorization = req.getHeader("Authorization");
         if(StringUtils.isBlank(authorization)) {
-        	response401(request, response);
+        	this.response401(request, response);
             return false;  
         }
         
@@ -64,10 +63,11 @@ public class JWTFilter extends BasicHttpAuthenticationFilter {
             try {
                 executeLogin(request, response);
             } catch (Exception e) {
-            	LOGGER.error("=============" + e.getMessage());
-            	throw new UnauthenticatedException(e.getMessage());
+            	this.response401(request, response, e.getMessage());
+            	return false;
             }
         }
+        
         return true;
     }
     
@@ -96,6 +96,15 @@ public class JWTFilter extends BasicHttpAuthenticationFilter {
         try {
             HttpServletResponse httpServletResponse = (HttpServletResponse) resp;
             httpServletResponse.sendRedirect("/401");
+        } catch (IOException e) {
+            LOGGER.error(e.getMessage());
+        }
+    }
+    
+    private void response401(ServletRequest req, ServletResponse resp, String errorMsg) {
+        try {
+            HttpServletResponse httpServletResponse = (HttpServletResponse) resp;
+            httpServletResponse.sendRedirect("/401?errorMsg=" + errorMsg);
         } catch (IOException e) {
             LOGGER.error(e.getMessage());
         }

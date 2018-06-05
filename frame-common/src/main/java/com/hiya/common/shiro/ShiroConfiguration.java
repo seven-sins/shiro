@@ -92,7 +92,7 @@ public class ShiroConfiguration {
 		filterChainDefinitionMap.put("/admin", "roles[admin]");
 		
 		// 不需要登录也能访问
-		filterChainDefinitionMap.put("/login", "anon");
+		filterChainDefinitionMap.put("/auth/**", "anon");
 		filterChainDefinitionMap.put("/401", "anon");
 		filterChainDefinitionMap.put("/**", "jwt");
 		factory.setFilterChainDefinitionMap(filterChainDefinitionMap);

@@ -80,7 +80,7 @@ public class AuthRealm extends AuthorizingRealm {
 			throw new AuthenticationException("session过期");
 		}
 		if(!JWTUtil.verify(token, username, user.getPassword())) {
-			throw new AuthenticationException("session错误");
+			throw new AuthenticationException("session过期");
 		}
 		
 		return new SimpleAuthenticationInfo(username, token, getName());

@@ -36,6 +36,11 @@ public class CustomExceptionHandler {
 		return new Response<>(401, e.getMessage());
 	}
 	
+	@ExceptionHandler(HiyaException.class)
+	public Response<?> hiyaException(HiyaException e){
+		return new Response<>(e.getCode(), e.getMessage());
+	}
+	
 	@ExceptionHandler(Exception.class)
 	public Response<?> globalException(Exception e){
 		return new Response<>(400, e.getMessage());

@@ -8,7 +8,9 @@ E:\Java_Maven_Projects\shiro\frame-common\src\main\java\com\hiya\common\shiro\fi
 E:\Java_Maven_Projects\shiro\frame-common\src\main\java\com\hiya\common\base\BaseController.java
 E:\Java_Maven_Projects\shiro\frame-common\src\main\java\com\hiya\common\annotation\EnableExceptionHandler.java
 E:\Java_Maven_Projects\shiro\frame-common\src\main\java\com\hiya\common\utils\SpringUtil.java
+E:\Java_Maven_Projects\shiro\frame-common\src\main\java\com\hiya\common\utils\IdMaker.java
 E:\Java_Maven_Projects\shiro\frame-common\src\main\java\com\hiya\common\base\BaseMapper.java
+E:\Java_Maven_Projects\shiro\frame-common\src\main\java\com\hiya\common\exception\HiyaException.java
 E:\Java_Maven_Projects\shiro\frame-common\src\main\java\com\hiya\common\base\BaseService.java
 E:\Java_Maven_Projects\shiro\frame-common\src\main\java\com\hiya\common\shiro\CustomShiroSessionManager.java
 E:\Java_Maven_Projects\shiro\frame-common\src\main\java\com\hiya\common\config\mybatis\DruidConfiguration.java

@@ -39,7 +39,7 @@ public class CustomRedisSessionDao extends AbstractSessionDAO {
 
 	@Override
 	public void update(Session session) throws UnknownSessionException {
-		System.out.println("===============update================");  
+		// System.out.println("===============update================");  
         if (session == null || session.getId() == null) {  
             return;  
         }  
@@ -49,7 +49,7 @@ public class CustomRedisSessionDao extends AbstractSessionDAO {
 
 	@Override
 	protected Serializable doCreate(Session session) {
-		System.out.println("===============doCreate================");  
+		// System.out.println("===============doCreate================");  
         Serializable sessionId = this.generateSessionId(session);  
         this.assignSessionId(session, sessionId);  
   
@@ -59,7 +59,7 @@ public class CustomRedisSessionDao extends AbstractSessionDAO {
 
 	@Override
 	protected Session doReadSession(Serializable sessionId) {
-		System.out.println("==============doReadSession=================");  
+		// System.out.println("==============doReadSession=================");  
         if (sessionId == null) {  
             return null;  
         }  
@@ -73,7 +73,7 @@ public class CustomRedisSessionDao extends AbstractSessionDAO {
 	 */
 	@Override
     public Collection<Session> getActiveSessions() {  
-        System.out.println("==============getActiveSessions=================");  
+        // System.out.println("==============getActiveSessions=================");  
         Set<String> keys = redisTemplate.keys(ShiroCommon.SESSION_PREFIX + "*");  
         Set<Session> sessions = new HashSet<>();
         for(String key: keys) {
