@@ -10,10 +10,10 @@ import java.util.List;
  */
 public class Response<T> {
 
-	static final String SUCCESS = "success";
-	static final String FAILURE = "failure";
+	static final String SUCCESS = "操作成功";
+	static final String FAILURE = "操作失败";
 
-	private Integer code;
+	private Integer code = 200;
 
 	private T data;
 
@@ -86,4 +86,19 @@ public class Response<T> {
 		this.list = list;
 	}
 
+	public Response<T> code(Integer code){
+		this.code = code;
+		return this;
+	}
+	
+	public Response<T> message(String message){
+		this.message = message;
+		return this;
+	}
+	
+	public Response<T> data(T data){
+		this.data = data;
+		return this;
+	}
+	
 }
