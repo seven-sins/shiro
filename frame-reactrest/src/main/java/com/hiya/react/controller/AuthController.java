@@ -30,7 +30,7 @@ public class AuthController extends BaseController {
 	RedisService redisService;
 	
 	@PostMapping("/auth/login")
-	public Response<?> login(@RequestBody User user) {
+	public Response<String> login(@RequestBody User user) {
 		User userBean = userService.findByUsername(user.getUsername());
 		if(userBean == null) {
 			throw new AuthenticationException("用户未找到");
@@ -46,7 +46,7 @@ public class AuthController extends BaseController {
 		redisService.delete(key);
 		redisService.add(key, userBean);
 		
-		return new Response<>().data(JWTUtil.sign(user.getUsername(), user.getPassword()));
+		return new Response<String>().data(JWTUtil.sign(user.getUsername(), user.getPassword()));
 	}
 	
 	@GetMapping("/auth/logout")

@@ -10,6 +10,7 @@ import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.ImportSelector;
 import org.springframework.core.type.AnnotationMetadata;
 
+import com.hiya.common.aop.AopHandleException;
 import com.hiya.common.exception.CustomExceptionHandler;
 
 /**
@@ -20,7 +21,7 @@ import com.hiya.common.exception.CustomExceptionHandler;
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ ElementType.TYPE, ElementType.ANNOTATION_TYPE })
 @Inherited
-@Import({ EnableExceptionHandler.ExceptionHandlerImportSelector.class })
+@Import({ EnableExceptionHandler.ExceptionHandlerImportSelector.class, AopHandleException.class })
 public @interface EnableExceptionHandler {
 
 	static class ExceptionHandlerImportSelector implements ImportSelector {

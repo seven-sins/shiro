@@ -6,5 +6,5 @@ package com.hiya.common.base;
  */
 public class BaseController {
 
-	protected static final Response<String> SUCCESS = new Response<>(200, "success");
+	protected static final Response<?> SUCCESS = Response.success();
 }

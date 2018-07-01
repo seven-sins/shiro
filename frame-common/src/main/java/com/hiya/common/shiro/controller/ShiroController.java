@@ -16,9 +16,9 @@ public class ShiroController {
 	@GetMapping("/401")
 	public Response<?> unauthorized(String errorMsg){
 		if(StringUtils.isBlank(errorMsg)) {
-			return new Response<>(401, "无权限访问");
+			return Response.create(401, "无权限访问");
 		} else {
-			return new Response<>(401, errorMsg);
+			return Response.create(401, errorMsg);
 		}
 	}
 }

@@ -36,14 +36,14 @@ public class UserController extends BaseController {
 	}
 	
 	@PostMapping("/rest/sys/user")
-	public Response<String> create(@RequestBody User user) {
+	public Response<?> create(@RequestBody User user) {
 		userService.insert(user);
 		
 		return SUCCESS;
 	}
 	
 	@PutMapping("/rest/sys/user/{id}")
-	public Response<String> update(@PathVariable("id") Long id, @RequestBody User user) {
+	public Response<?> update(@PathVariable("id") Long id, @RequestBody User user) {
 		user.setId(id);
 		userService.update(user);
 		

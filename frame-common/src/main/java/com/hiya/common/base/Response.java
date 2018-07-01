@@ -9,11 +9,10 @@ import java.util.List;
  * @date 2018年1月1日 下午7:39:06
  */
 public class Response<T> {
-
 	static final String SUCCESS = "操作成功";
 	static final String FAILURE = "操作失败";
 
-	private Integer code = 200;
+	private Integer code = ResponseStatus.SUCCESS;
 
 	private T data;
 
@@ -21,14 +20,32 @@ public class Response<T> {
 
 	private String message;
 	
+	public static Response<?> create(String message) {
+		return new Response<>(message);
+	}
+	
+	public static Response<?> create(Integer code, String message) {
+		return new Response<>(code, message);
+	}
+	
+	public static Response<?> success() {
+		return new Response<>(ResponseStatus.SUCCESS, SUCCESS);
+	}
+	
 	public Response() {
+		this.code = ResponseStatus.SUCCESS;
+		this.message = SUCCESS;
 	}
 
 	public Response(T t) {
+		this.code = ResponseStatus.SUCCESS;
+		this.message = SUCCESS;
 		this.data = t;
 	}
 	
 	public Response(List<T> t) {
+		this.code = ResponseStatus.SUCCESS;
+		this.message = SUCCESS;
 		this.list = t;
 	}
 
@@ -45,13 +62,6 @@ public class Response<T> {
 	public Response(Integer code, String message) {
 		this.code = code;
 		this.message = message;
-	}
-	
-	public static Response<?> success() {
-		Response<?> response = new Response<>();
-		response.code = 200;
-		response.message = SUCCESS;
-		return response;
 	}
 	
 	public Integer getCode() {
@@ -98,6 +108,11 @@ public class Response<T> {
 	
 	public Response<T> data(T data){
 		this.data = data;
+		return this;
+	}
+	
+	public Response<T> list(List<T> list){
+		this.list = list;
 		return this;
 	}
 	

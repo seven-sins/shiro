@@ -30,19 +30,19 @@ public class CustomExceptionHandler {
 	@ResponseStatus(HttpStatus.BAD_REQUEST)
 	@ExceptionHandler(ShiroException.class)
 	public Response<?> handle401(ShiroException e) {
-		return new Response<>(401, e.getMessage());
+		return Response.create(401, e.getMessage());
 	}
 	
 	@ResponseStatus(HttpStatus.BAD_REQUEST)
 	@ExceptionHandler(AuthenticationException.class)
 	public Response<?> handleAuthException(AuthenticationException e){
-		return new Response<>(401, e.getMessage());
+		return Response.create(401, e.getMessage());
 	}
 	
 	@ResponseStatus(HttpStatus.BAD_REQUEST)
 	@ExceptionHandler(UnauthenticatedException.class)
 	public Response<?> unauthenticated(UnauthenticatedException e) {
-		return new Response<>(401, e.getMessage());
+		return Response.create(401, e.getMessage());
 	}
 	
 	/**
@@ -53,7 +53,7 @@ public class CustomExceptionHandler {
 	@ResponseStatus(HttpStatus.BAD_REQUEST)
 	@ExceptionHandler(HiyaException.class)
 	public Response<?> hiyaException(HiyaException e){
-		return new Response<>(e.getCode(), e.getMessage());
+		return Response.create(e.getCode(), e.getMessage());
 	}
 	
 	/**
@@ -71,12 +71,12 @@ public class CustomExceptionHandler {
 			sb.append(item.getDefaultMessage());
 		}
 		
-		return new Response<>(400, sb.toString());
+		return Response.create(400, sb.toString());
 	}
 	
 	@ResponseStatus(HttpStatus.BAD_REQUEST)
 	@ExceptionHandler(Exception.class)
 	public Response<?> globalException(Exception e){
-		return new Response<>(400, e.getMessage());
+		return Response.create(400, e.getMessage());
 	}
 }

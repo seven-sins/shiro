@@ -1,5 +1,7 @@
 package com.hiya.common.exception;
 
+import com.hiya.common.base.ResponseStatus;
+
 /**
  * 自定义异常
  * @author seven sins
@@ -11,7 +13,7 @@ public class HiyaException extends RuntimeException {
 	/**
 	 * 错误代码
 	 */
-	private Integer code = 400;
+	private Integer code = ResponseStatus.FAILTURE;
 	/**
 	 * 错误信息
 	 */
