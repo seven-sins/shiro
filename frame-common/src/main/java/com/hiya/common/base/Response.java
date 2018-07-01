@@ -3,22 +3,34 @@ package com.hiya.common.base;
 import java.util.List;
 
 /**
- * 请求的响应
+ * 请求响应
  * 
  * @author seven sins
  * @date 2018年1月1日 下午7:39:06
  */
 public class Response<T> {
-	static final String SUCCESS = "操作成功";
-	static final String FAILURE = "操作失败";
+	static final String SUCCESS_MESSAGE = "操作成功";
+	static final String FAILURE_MESSAGE = "操作失败";
 
-	private Integer code = ResponseStatus.SUCCESS;
+	private Integer code = ResponseStatus.OK;
 
 	private T data;
 
 	private List<T> list;
 
 	private String message;
+	
+	public static final Response<?> SUCCESS = success();
+	
+	public static final Response<?> FAILURE = failure();
+	
+	private static Response<?> success() {
+		return new Response<>(ResponseStatus.OK, SUCCESS_MESSAGE);
+	}
+	
+	private static Response<?> failure() {
+		return new Response<>(ResponseStatus.FAILTURE, FAILURE_MESSAGE);
+	}
 	
 	public static Response<?> create(String message) {
 		return new Response<>(message);
@@ -28,24 +40,20 @@ public class Response<T> {
 		return new Response<>(code, message);
 	}
 	
-	public static Response<?> success() {
-		return new Response<>(ResponseStatus.SUCCESS, SUCCESS);
-	}
-	
 	public Response() {
-		this.code = ResponseStatus.SUCCESS;
-		this.message = SUCCESS;
+		this.code = ResponseStatus.OK;
+		this.message = SUCCESS_MESSAGE;
 	}
 
 	public Response(T t) {
-		this.code = ResponseStatus.SUCCESS;
-		this.message = SUCCESS;
+		this.code = ResponseStatus.OK;
+		this.message = SUCCESS_MESSAGE;
 		this.data = t;
 	}
 	
 	public Response(List<T> t) {
-		this.code = ResponseStatus.SUCCESS;
-		this.message = SUCCESS;
+		this.code = ResponseStatus.OK;
+		this.message = SUCCESS_MESSAGE;
 		this.list = t;
 	}
 

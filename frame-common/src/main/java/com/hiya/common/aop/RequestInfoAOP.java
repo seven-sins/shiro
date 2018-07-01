@@ -26,9 +26,9 @@ import com.hiya.common.exception.HiyaException;
 @Aspect
 @Component
 @Order(1)
-public class AopHandleException {
+public class RequestInfoAOP {
 	
-	private static final Logger LOG = Logger.getLogger(AopHandleException.class);
+	private static final Logger LOG = Logger.getLogger(RequestInfoAOP.class);
 	
 	@Pointcut("execution(* com.hiya..*.*Controller.*(..))")
 	public void init() {
@@ -37,20 +37,25 @@ public class AopHandleException {
 	@Before("init()")
 	public void beforeAdvice(JoinPoint joinPoint) {
 		logParams();
+		//
+		Object[] object = joinPoint.getArgs();
+		if(object != null && object.length > 0 && object[0] != null) {
+			LOG.info("=============params: " + JSONObject.toJSON(object));;
+		}
 	}
 	
 	@AfterThrowing(pointcut = "init()", throwing = "e")  
     public void afterThrowing(JoinPoint joinPoint, Throwable e) {  
 		// 请求触发异常
 		logParams();
-		LOG.info("=============请求触发异常");
 		/**
     	 * 主动抛出的异常
     	 */
         if(e instanceof HiyaException){
-        	
+        	LOG.info("=============请求触发异常: " + ((HiyaException)e).getMessage());
         }else{ // 未捕获异常
-        	throw new HiyaException(-1, "未捕获异常: " + e);
+        	LOG.info("=============未捕获异常: " + e.getMessage());
+        	throw new HiyaException(-1, "未捕获异常: " + e.getMessage());
         }
 	}
 	

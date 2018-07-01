@@ -39,7 +39,7 @@ public class UserController extends BaseController {
 	public Response<?> create(@RequestBody User user) {
 		userService.insert(user);
 		
-		return SUCCESS;
+		return Response.SUCCESS;
 	}
 	
 	@PutMapping("/rest/sys/user/{id}")
@@ -47,7 +47,7 @@ public class UserController extends BaseController {
 		user.setId(id);
 		userService.update(user);
 		
-		return SUCCESS;
+		return Response.SUCCESS;
 	}
 	
 }

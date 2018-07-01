@@ -17,6 +17,6 @@ public class MainController extends BaseController {
 	@GetMapping("/api/main")
 	@RequiresPermissions("base")
 	public Response<?> main(){
-		return Response.success();
+		return Response.SUCCESS;
 	}
 }

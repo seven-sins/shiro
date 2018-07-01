@@ -59,6 +59,6 @@ public class AuthController extends BaseController {
 			//
 			subject.logout();
 		}
-		return Response.success();
+		return Response.SUCCESS;
 	}
 }

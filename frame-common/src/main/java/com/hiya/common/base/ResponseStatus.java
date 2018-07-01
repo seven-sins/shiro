@@ -9,7 +9,7 @@ public class ResponseStatus {
 	/**
 	 * 成功状态
 	 */
-	public static final int SUCCESS = 200;
+	public static final int OK = 200;
 	/**
 	 * 异常状态
 	 */

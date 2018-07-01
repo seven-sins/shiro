@@ -37,17 +37,16 @@ public class AuthController extends BaseController {
 	}
 	
 	@PostMapping("/loginUser")
-	public Object loginUser(@RequestBody User user, HttpSession session) {
+	public Response<?> loginUser(@RequestBody User user, HttpSession session) {
 		UsernamePasswordToken token = new UsernamePasswordToken(user.getUsername(), user.getPassword());
 		Subject subject = SecurityUtils.getSubject();
 		try {
 			subject.login(token);
 			User currentLoginUser = (User) subject.getPrincipal();
 			session.setAttribute("user", currentLoginUser);
-			
-			return SUCCESS;
+			return Response.SUCCESS;
 		}catch(Exception e) {
-			return new Response<>(400, "fail");
+			return Response.FAILURE;
 		}
 	}
 }

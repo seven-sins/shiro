@@ -13,6 +13,6 @@ public class DemoController extends BaseController {
 	@GetMapping("/rest/base/test")
 	@RequiresPermissions("base")
 	public Response<?> find() {
-		return Response.success();
+		return Response.SUCCESS;
 	}
 }

@@ -26,6 +26,6 @@ public class UserController extends BaseController {
 	public Response<?> create(@Valid @RequestBody User user){
 		userService.insert(user);
 		
-		return Response.success();
+		return Response.SUCCESS;
 	}
 }
