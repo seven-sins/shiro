@@ -36,18 +36,13 @@ public class RequestInfoAOP {
 	
 	@Before("init()")
 	public void beforeAdvice(JoinPoint joinPoint) {
-		logParams();
-		//
-		Object[] object = joinPoint.getArgs();
-		if(object != null && object.length > 0 && object[0] != null) {
-			LOG.info("=============params: " + JSONObject.toJSON(object));;
-		}
+		logParams(joinPoint);
 	}
 	
 	@AfterThrowing(pointcut = "init()", throwing = "e")  
     public void afterThrowing(JoinPoint joinPoint, Throwable e) {  
 		// 请求触发异常
-		logParams();
+		logParams(joinPoint);
 		/**
     	 * 主动抛出的异常
     	 */
@@ -59,7 +54,7 @@ public class RequestInfoAOP {
         }
 	}
 	
-	private void logParams() {
+	private void logParams(JoinPoint joinPoint) {
 		HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
 		// 输出url
 		String url = request.getRequestURI();
@@ -69,7 +64,12 @@ public class RequestInfoAOP {
 		// 输出参数
 		Map<String, String[]> parameterMap = request.getParameterMap();
 		if(parameterMap != null && parameterMap.size() > 0) {
-			LOG.info("=============params: " + JSONObject.toJSON(parameterMap));
+			LOG.info("=============get params: " + JSONObject.toJSON(parameterMap));
+		}
+		//
+		Object[] object = joinPoint.getArgs();
+		if(object != null && object.length > 0 && object[0] != null) {
+			LOG.info("=============post params: " + JSONObject.toJSON(object));;
 		}
 	}
 }
